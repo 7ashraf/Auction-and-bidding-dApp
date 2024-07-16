@@ -1,0 +1,30 @@
+{
+  "canisters": {
+    "auction_app_backend": {
+      "candid": "src/auction_app_backend/auction_app_backend.did",
+      "package": "auction_app_backend",
+      "type": "rust"
+    },
+    "auction_app_frontend": {
+      "dependencies": [
+        "auction_app_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/auction_app_frontend/src/index.html"
+      },
+      "source": [
+        "src/auction_app_frontend/assets",
+        "dist/auction_app_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

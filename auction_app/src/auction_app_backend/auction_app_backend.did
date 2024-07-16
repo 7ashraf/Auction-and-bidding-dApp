@@ -1,0 +1,34 @@
+type Error = variant {
+  NotFound : record { msg : text };
+  InvalidBid : record { msg : text };
+  Unauthorized : record { msg : text };
+};
+type Item = record {
+  id : nat64;
+  title : text;
+  updated_at : opt nat64;
+  owner : principal;
+  starting_bid : nat64;
+  description : text;
+  highest_bidder : opt principal;
+  created_at : nat64;
+  new_owner : opt principal;
+  highest_bid : opt nat64;
+};
+type ItemPayload = record {
+  title : text;
+  starting_bid : nat64;
+  description : text;
+};
+type Result = variant { Ok : Item; Err : Error };
+service : {
+  add_item : (ItemPayload) -> (opt Item);
+  bid_for_item : (nat64, nat64) -> (Result);
+  get_all_items : () -> (vec Item) query;
+  get_item : (nat64) -> (Result) query;
+  get_item_bid_on_most : () -> (opt Item) query;
+  get_item_sold_for_most : () -> (opt Item) query;
+  get_items_length : () -> (nat64) query;
+  stop_item_listing : (nat64) -> (Result);
+  update_item : (nat64, ItemPayload) -> (Result);
+}
